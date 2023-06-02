@@ -25,8 +25,8 @@ Relies on AWS credentials to retrieve a token for interacting with an EKS cluste
 | Name | Default | Description|
 |------|---------|------------|
 |config_path| `~/.kube/config` | Path to kubecl config. |
-|namespace| `default` | Namespace to deploy the container-agent to. |
-|values | `.` | Values.yaml file for helm deployment of Container Runner. Resource Class Token will go here|
+|namespace| `default` | Namespace to deploy nexus to. |
+|values | `.` | Values.yaml file for helm deployment of Nexus.|
 |chart_version| "" | Specify the exact chart version to install. If this is not specified, the latest version is installed |
 |cluster_name| "" | Specify the exact cluster_name to deploy the chart version to |
 |cluster_endpoint| "" | Specify the exact cluster endpoint version to deploy the chart to |
