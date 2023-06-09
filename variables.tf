@@ -6,7 +6,7 @@ variable "namespace" {
 
 variable "namespace_annotations" {
   description = "namespace to deploy nexus to"
-  type        = string
+  type        = map(string)
   default = {
     "istio-injection" = "enabled"
   }
