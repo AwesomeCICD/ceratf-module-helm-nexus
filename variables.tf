@@ -34,8 +34,7 @@ variable "values" {
 variable "chart_version" {
   description = "helm chart version"
   type        = string
-  default     = ""
-}
+  default     = "55.0.0" #latest as of 2023/06/09}
 
 #cacert - /etc/kubernetes/pki
 #cluster-endpoint - https://BBB6A4755358F411DCF363ED7381058D.gr7.eu-west-1.eks.amazonaws.com
