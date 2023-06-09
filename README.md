@@ -25,25 +25,20 @@ Relies on AWS credentials to retrieve a token for interacting with an EKS cluste
 | Name | Default | Description|
 |------|---------|------------|
 |config_path| `~/.kube/config` | Path to kubecl config. |
-|namespace| `default` | Namespace to deploy nexus to. |
+|namespace| `nexus` | Namespace to deploy nexus to. |
 |values | `.` | Values.yaml file for helm deployment of Nexus.|
-|chart_version| "" | Specify the exact chart version to install. If this is not specified, the latest version is installed |
-|cluster_name| "" | Specify the exact cluster_name to deploy the chart version to |
-|cluster_endpoint| "" | Specify the exact cluster endpoint version to deploy the chart to |
-|cluster_ca_certificate| "" | Specify the cluster_ca_certificate version to install. EKS normally /etc/kubernetes/pki |
+|chart_version| "55.0.0" | Specify the exact chart version to install. If this is not specified, the latest version is installed |
 
 ### Example usage
 
 ```hcl
 module "nexus" {
-  source = "github.com/AwesomeCICD/ceratf-module-helm-nexus"
+  source = "git@github.com:AwesomeCICD/ceratf-module-helm-nexus"
 
-  values                       = "~/path/to/values/file"
-  namespace                    = "container-runner"
-  config_path                  = "~/path/to/kube/config"
-  cluster_name                 = "~/path/to/kube/config"
-  cluster_ca_certificate       = "/etc/kubernetes/pki"
-  cluster_endpoint             = "https://BBB6A4755358F411DCF363ED7381058D.gr7.eu-west-1.eks.amazonaws.com"
-  
+  # Optional
+  #values                       = "~/path/to/values/file"
+  #namespace                    = "nexus" #default
+  #chart_version                = "55.0.0"
+ 
 }
 ```
