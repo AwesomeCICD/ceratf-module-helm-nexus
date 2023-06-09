@@ -1,3 +1,5 @@
+#This module will implicitly inherit the "helm" provider configured in the regional CERA deployment plan
+/*
 variable "cluster_ca_certificate" {
   description = "k8s cluster CA cert"
 }
@@ -15,6 +17,7 @@ variable "config_path" {
   type        = string
   default     = "~/.kube/config"
 }
+*/
 
 variable "namespace" {
   description = "namespace to deploy nexus to"
