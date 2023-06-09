@@ -4,6 +4,15 @@ variable "namespace" {
   default     = "nexus"
 }
 
+variable "namespace_annotations" {
+  description = "namespace to deploy nexus to"
+  type        = string
+  default     = {
+    "istio-injection" = "enabled"
+    }
+}
+
+
 variable "values" {
   description = "path to values.yaml file"
   type        = string
