@@ -3,11 +3,11 @@ resource "kubernetes_namespace" "nexus" {
     name        = var.namespace
     
     labels = {
-      ISTIO-INJECTION = "enabled"
+      istio-injection = "enabled"
     }
 
     annotations = {
-      ISTIO-INJECTION = "enabled"
+      istio-injection = "enabled"
     }
   }
 }
