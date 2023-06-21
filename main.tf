@@ -1,7 +1,14 @@
 resource "kubernetes_namespace" "nexus" {
   metadata {
     name        = var.namespace
-    annotations = var.namespace_annotations #default enables istio injection
+    
+    labels = {
+      ISTIO-INJECTION = "enabled"
+    }
+
+    annotations = {
+      ISTIO-INJECTION = "enabled"
+    }
   }
 }
 
@@ -11,7 +18,7 @@ resource "helm_release" "nexus" {
 
   repository = "https://sonatype.github.io/helm3-charts/"
   chart      = "nexus-repository-manager"
-  namespace  = var.namespace
+  namespace  = kubernetes_namespace.nexus.metadata[0].name
   version    = var.chart_version
 
 
