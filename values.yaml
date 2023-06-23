@@ -16,10 +16,10 @@ imagePullSecrets:
 nexus:
   docker:
     enabled: true
-      registries:
-        - port: 8443
-          #host: chart.local
-          #secretName: registry-secret
+    registries:
+      - port: 8443
+        #host: chart.local
+        #secretName: registry-secret
   env:
     # minimum recommended memory settings for a small, person instance from
     # https://help.sonatype.com/repomanager3/product-information/system-requirements
