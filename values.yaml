@@ -44,11 +44,11 @@ nexus:
   # minimum recommended memory settings for a small, person instance from
   # https://help.sonatype.com/repomanager3/product-information/system-requirements
     requests:
-      cpu: 500m
-      memory: 4Gi
+      cpu: 2
+      memory: 6Gi
     limits:
-      cpu: 500m
-      memory: 4Gi
+      cpu: 4
+      memory: 6Gi
 
   # The ports should only be changed if the nexus image uses a different port
   nexusPort: 8081
