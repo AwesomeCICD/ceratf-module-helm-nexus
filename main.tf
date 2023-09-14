@@ -29,4 +29,6 @@ resource "helm_release" "nexus" {
   depends_on = [
     kubernetes_namespace.nexus
   ]
+
+  timeout = 600
 }
