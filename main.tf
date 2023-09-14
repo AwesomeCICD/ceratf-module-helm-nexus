@@ -1,4 +1,4 @@
-resource "kubernetes_namespace" "nexus" {
+resource "kubernetes_namespace" "nexus_namespace" {
   metadata {
     name        = var.namespace
     
@@ -18,7 +18,7 @@ resource "helm_release" "nexus" {
 
   repository = "https://sonatype.github.io/helm3-charts/"
   chart      = "nexus-repository-manager"
-  namespace  = kubernetes_namespace.nexus.metadata[0].name
+  namespace  = kubernetes_namespace.nexus_namespace.metadata[0].name
   version    = var.chart_version
 
 
@@ -27,7 +27,7 @@ resource "helm_release" "nexus" {
   ]
 
   depends_on = [
-    kubernetes_namespace.nexus
+    kubernetes_namespace.nexus_namespace
   ]
 
   timeout = 600
