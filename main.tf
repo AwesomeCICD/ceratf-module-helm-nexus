@@ -33,20 +33,3 @@ resource "helm_release" "nexus" {
   timeout = 600
 
 }
-
-resource "random_password" "new_nexus_password" {
-  length           = 16
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
-}
-
-resource "nexus_security_user" "admin" {
-  userid     = "admin"
-  firstname  = "Administrator"
-  lastname   = "User"
-  email      = "eddie@circleci.com"
-  password   = random_password.new_nexus_password.result
-  roles      = ["nx-admin"]
-  status     = "active"
-  depends_on = [helm_release.nexus]
-}

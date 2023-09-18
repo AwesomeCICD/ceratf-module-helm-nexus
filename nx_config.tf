@@ -1,9 +1,11 @@
-
-
 resource "random_password" "deployer_password" {
   length           = 16
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+resource "nexus_security_anonymous" "system" {
+  enabled = true
 }
 
 resource "nexus_repository_docker_hosted" "cera_hosted" {
