@@ -3,6 +3,6 @@ output "namespace" {
 }
 
 output "admin_password" {
-  value     = random_password.new_nexus_password.result
-  sensitive = true
+  value     = "Nexus is using default admin password admin123 you should change that."
+
 }
