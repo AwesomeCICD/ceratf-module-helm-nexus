@@ -23,9 +23,3 @@ variable "chart_version" {
   type        = string
   default     = "55.0.0" #latest as of 2023/06/09
 }
-
-variable "host_domain" {
-  description = "region specific external URL. i.e. nexus.namer.circleci-labs.com"
-  type        = string
-
-}
