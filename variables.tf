@@ -23,3 +23,8 @@ variable "chart_version" {
   type        = string
   default     = "55.0.0" #latest as of 2023/06/09
 }
+
+variable "vault_mount_path" {
+  type    = string
+  default = "secret"
+}

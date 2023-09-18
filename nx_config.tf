@@ -5,6 +5,19 @@ resource "random_password" "deployer_password" {
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
+resource "vault_kv_secret_v2" "cera_deployer" {
+  mount               = var.vault_mount_path
+  name                = "nexus/boa-deployer"
+  cas                 = 1
+  delete_all_versions = true
+  data_json = jsonencode(
+    {
+      username = nexus_security_user.cera_deployer.userid,
+      password = random_password.deployer_password.result
+    }
+  )
+}
+
 resource "nexus_security_anonymous" "system" {
   enabled    = true
   depends_on = [helm_release.nexus]

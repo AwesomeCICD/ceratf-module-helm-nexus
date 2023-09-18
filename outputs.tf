@@ -15,3 +15,4 @@ output "deployer_username" {
   value     = nexus_security_user.cera_deployer.userid
   sensitive = true
 }
+
