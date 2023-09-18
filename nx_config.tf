@@ -1,3 +1,4 @@
+
 resource "random_password" "deployer_password" {
   length           = 16
   special          = true
@@ -5,7 +6,8 @@ resource "random_password" "deployer_password" {
 }
 
 resource "nexus_security_anonymous" "system" {
-  enabled = true
+  enabled    = true
+  depends_on = [helm_release.nexus]
 }
 
 resource "nexus_repository_docker_hosted" "cera_hosted" {
@@ -27,6 +29,7 @@ resource "nexus_repository_docker_hosted" "cera_hosted" {
   # cleanup {
   #   policy_names = []
   # }
+  depends_on = [helm_release.nexus]
 
 }
 
@@ -39,7 +42,7 @@ resource "nexus_repository_helm_hosted" "cera_helm" {
     strict_content_type_validation = false
     write_policy                   = "ALLOW"
   }
-  depends_on = [ helm_release.nexus ]
+  depends_on = [helm_release.nexus]
 }
 
 resource "nexus_security_role" "cera_deploy" {
@@ -63,4 +66,13 @@ resource "nexus_security_user" "cera_deployer" {
   status    = "active"
 
   depends_on = [nexus_security_role.cera_deploy]
+}
+
+
+resource "nexus_security_realms" "example" {
+  active = [
+    "NexusAuthenticatingRealm",
+    "NexusAuthorizingRealm",
+    "DockerBearerTokenRealm"
+  ]
 }
