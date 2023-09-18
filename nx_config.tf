@@ -19,7 +19,7 @@ resource "nexus_repository_docker_hosted" "cera_hosted" {
   }
 
   storage {
-    blob_store_name                = "cera-hosted"
+    blob_store_name                = "default"
     strict_content_type_validation = true
     write_policy                   = "ALLOW"
   }
@@ -35,10 +35,11 @@ resource "nexus_repository_helm_hosted" "cera_helm" {
   online = true
 
   storage {
-    blob_store_name                = "cera-helm"
+    blob_store_name                = "default"
     strict_content_type_validation = false
     write_policy                   = "ALLOW"
   }
+  depends_on = [ helm_release.nexus ]
 }
 
 resource "nexus_security_role" "cera_deploy" {
