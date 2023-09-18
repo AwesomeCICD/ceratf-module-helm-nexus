@@ -7,11 +7,11 @@ output "admin_password" {
 
 }
 output "deployer_password" {
-  value = random_password.deployer_password.result
+  value     = random_password.deployer_password.result
   sensitive = true
 }
 
 output "deployer_username" {
-  value = nexus_security_user.cera_deployer.userid
+  value     = nexus_security_user.cera_deployer.userid
   sensitive = true
 }
