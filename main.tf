@@ -32,13 +32,6 @@ resource "helm_release" "nexus" {
 
   timeout = 600
 
-
-  provisioner "remote-exec" {
-    inline = [
-      "existing=$(cat /nexus-data/admin-password.txt)",
-      "echo $existing"
-    ]
-  }
 }
 
 resource "random_password" "new_nexus_password" {
@@ -47,3 +40,13 @@ resource "random_password" "new_nexus_password" {
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
+resource "nexus_security_user" "admin" {
+  userid    = "admin"
+  firstname = "Administrator"
+  lastname  = "User"
+  email     = "eddie@circleci.com"
+  password  = random_password.new_nexus_password.result
+  roles     = ["nx-admin"]
+  status    = "active"
+  depends_on = [ helm_release.nexus ]
+}
