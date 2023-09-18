@@ -31,4 +31,19 @@ resource "helm_release" "nexus" {
   ]
 
   timeout = 600
+
+
+  provisioner "remote-exec" {
+    inline = [
+      "existing=$(cat /nexus-data/admin-password.txt)",
+      "echo $existing"
+    ]
+  }
 }
+
+resource "random_password" "new_nexus_password" {
+  length           = 16
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
