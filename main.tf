@@ -1,7 +1,7 @@
 resource "kubernetes_namespace" "nexus_namespace" {
   metadata {
-    name        = var.namespace
-    
+    name = var.namespace
+
     labels = {
       istio-injection = "enabled"
     }
@@ -41,12 +41,12 @@ resource "random_password" "new_nexus_password" {
 }
 
 resource "nexus_security_user" "admin" {
-  userid    = "admin"
-  firstname = "Administrator"
-  lastname  = "User"
-  email     = "eddie@circleci.com"
-  password  = random_password.new_nexus_password.result
-  roles     = ["nx-admin"]
-  status    = "active"
-  depends_on = [ helm_release.nexus ]
+  userid     = "admin"
+  firstname  = "Administrator"
+  lastname   = "User"
+  email      = "eddie@circleci.com"
+  password   = random_password.new_nexus_password.result
+  roles      = ["nx-admin"]
+  status     = "active"
+  depends_on = [helm_release.nexus]
 }

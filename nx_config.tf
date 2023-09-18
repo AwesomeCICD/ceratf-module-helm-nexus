@@ -46,11 +46,11 @@ resource "nexus_security_role" "cera_deploy" {
     "nx-repository-admin-docker-cera-hosted-*",
     "nx-repository-admin-helm-cera-helm-*"
   ]
-  roleid = "cera-deployer"
-  depends_on = [ nexus_repository_docker_hosted.cera_hosted,nexus_repository_helm_hosted.cera_helm ]
+  roleid     = "cera-deployer"
+  depends_on = [nexus_repository_docker_hosted.cera_hosted, nexus_repository_helm_hosted.cera_helm]
 }
 
-resource "nexus_security_user" "admin" {
+resource "nexus_security_user" "cera_deployer" {
   userid    = "cera-deployer"
   firstname = "CERA"
   lastname  = "Deployer"
@@ -59,5 +59,5 @@ resource "nexus_security_user" "admin" {
   roles     = [nexus_security_role.cera_deploy.roleid]
   status    = "active"
 
-  depends_on = [ nexus_security_role.cera_deploy ]
+  depends_on = [nexus_security_role.cera_deploy]
 }
