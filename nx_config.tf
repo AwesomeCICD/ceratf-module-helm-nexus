@@ -1,15 +1,11 @@
 
 resource "random_password" "deployer_password" {
-  length           = 16
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+  length = 24
 }
 
 resource "vault_kv_secret_v2" "cera_deployer" {
-  mount               = var.vault_mount_path
-  name                = "nexus/boa-deployer"
-  cas                 = 1
-  delete_all_versions = true
+  mount = var.vault_mount_path
+  name  = "nexus/boa-deployer"
   data_json = jsonencode(
     {
       username = nexus_security_user.cera_deployer.userid,
