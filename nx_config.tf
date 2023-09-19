@@ -60,7 +60,8 @@ resource "nexus_security_role" "cera_deploy" {
   name        = "CERA Deployer"
   privileges = [
     "nx-repository-admin-docker-cera-hosted-*",
-    "nx-repository-admin-helm-cera-helm-*"
+    "nx-repository-admin-helm-cera-helm-*",
+    "nx-repository-view-docker-*-*"
   ]
   roleid     = "cera-deployer"
   depends_on = [nexus_repository_docker_hosted.cera_hosted, nexus_repository_helm_hosted.cera_helm]
