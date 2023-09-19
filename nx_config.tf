@@ -1,6 +1,7 @@
 
 resource "random_password" "deployer_password" {
-  length = 24
+  length  = 24
+  special = false
 }
 
 resource "vault_kv_secret_v2" "cera_deployer" {
@@ -71,7 +72,7 @@ resource "nexus_security_user" "cera_deployer" {
   lastname  = "Deployer"
   email     = "eddie@circleci.com"
   password  = random_password.deployer_password.result
-  roles     = [nexus_security_role.cera_deploy.roleid]
+  roles     = [nexus_security_role.cera_deploy.roleid, "nx-anonymous"]
   status    = "active"
 
   depends_on = [nexus_security_role.cera_deploy]
