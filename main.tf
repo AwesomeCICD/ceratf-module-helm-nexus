@@ -36,15 +36,17 @@ resource "helm_release" "nexus" {
 
 
 resource "null_resource" "nexus_password_to_secret" {
-  # Changes to any instance of the cluster requires re-provisioning
+  # only run when we first create a nexus release
   triggers = {
     nexus_id = helm_release.nexus.id
   }
 
-
-
   provisioner "local-exec" {
     # Bootstrap script called with private_ip of each node in the cluster
-    command = "kubectl get pods -n"
+    command = "change_nexus_password.sh ${var.nexus_admin_password} ${var.circleci_region}"
   }
 }
+
+
+
+
