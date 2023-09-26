@@ -33,3 +33,18 @@ resource "helm_release" "nexus" {
   timeout = 600
 
 }
+
+
+resource "null_resource" "nexus_password_to_secret" {
+  # Changes to any instance of the cluster requires re-provisioning
+  triggers = {
+    nexus_id = helm_release.nexus.id
+  }
+
+
+
+  provisioner "local-exec" {
+    # Bootstrap script called with private_ip of each node in the cluster
+    command = "kubectl get pods -n"
+  }
+}
