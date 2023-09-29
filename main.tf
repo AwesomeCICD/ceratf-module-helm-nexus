@@ -33,3 +33,22 @@ resource "helm_release" "nexus" {
   timeout = 600
 
 }
+
+
+resource "null_resource" "nexus_password_to_secret" {
+  # only run when we first create a nexus release
+  triggers = {
+    nexus_id = helm_release.nexus.id
+  }
+
+  provisioner "local-exec" {
+    # Bootstrap script called with private_ip of each node in the cluster
+    command = "${path.module}/change_nexus_password.sh ${var.nexus_admin_password} ${var.circleci_region}"
+  }
+
+  depends_on = [helm_release.nexus]
+}
+
+
+
+

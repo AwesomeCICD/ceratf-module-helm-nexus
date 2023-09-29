@@ -23,3 +23,20 @@ variable "chart_version" {
   type        = string
   default     = "55.0.0" #latest as of 2023/06/09
 }
+
+
+variable "circleci_region" {
+  description = "where we at"
+  type        = string
+}
+
+variable "nexus_admin_password" {
+  description = "the target password for nexus admin"
+  type        = string
+  sensitive   = true
+}
+
+variable "vault_mount_path" {
+  type    = string
+  default = "secret"
+}
