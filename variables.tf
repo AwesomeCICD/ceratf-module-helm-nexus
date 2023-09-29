@@ -35,3 +35,8 @@ variable "nexus_admin_password" {
   type        = string
   sensitive   = true
 }
+
+variable "vault_mount_path" {
+  type    = string
+  default = "secret"
+}
