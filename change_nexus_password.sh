@@ -3,7 +3,7 @@ REGION=${2}
 set +e
 
 
-response=$(curl -w "%{http_code}"  -ifu admin:"admin123" \
+response=$(curl -w "%{http_code}"  -iu admin:"admin123" \
       -XPUT -H 'Content-Type: text/plain' \
       --data "${NEW_PASSWORD}" \
       https://nexus.${REGION}.circleci-labs.com/service/rest/v1/security/users/admin/change-password \
