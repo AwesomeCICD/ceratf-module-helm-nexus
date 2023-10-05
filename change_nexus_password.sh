@@ -12,6 +12,8 @@ response=$(curl -w "%{http_code}"  -ifu admin:"admin123" \
 
 if [ "$response" == "503" ]; then
       #Nexus not there yet, so we just silently proceed.
+      echo "Nothing to do yet"
 else
       #nexus admin set, celebrate
+      echo "job well done"
 fi
