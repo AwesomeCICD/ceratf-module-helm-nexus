@@ -17,7 +17,7 @@ resource "vault_kv_secret_v2" "cera_deployer" {
 
 resource "nexus_security_anonymous" "system" {
   enabled    = true
-  depends_on = [null_resource.nexus_password_to_secret]
+  depends_on = [null_resource.nexus_password_to_secret, helm_release.nexus]
 }
 
 resource "nexus_repository_docker_hosted" "cera_hosted" {
