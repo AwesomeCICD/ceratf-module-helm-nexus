@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   terraform: circleci/terraform@3.2.1
-
+  semver: cci-labs/semver@0.0.3
 
 jobs:
   tf-validate:
@@ -15,5 +15,19 @@ workflows:
     jobs:
       - tf-validate:
           name: Validate Terraform Plan
+      - semver/bump:
+          pre-steps: 
+            - semver/getfromgit
+          post-steps: 
+            - run: 
+                name: Use new version values
+                command: |
+                  echo "Tagging as: ${MAJOR}.${MINOR}.${PATCH}"
+                  git tag ${MAJOR}.${MINOR}.${PATCH}
+                  git push --tags
+          requires: [Validate Terraform Plan]
+          filters:
+            branches:
+              only: [main]
 
 # VS Code Extension Version: 1.4.0
