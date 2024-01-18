@@ -5,7 +5,7 @@ Terraform module using Helm to deploy Nexus.
 Relies on AWS credentials to retrieve a token for interacting with an EKS cluster. This means that you must have already assumed an AWS role with access to the cluster before you can successfully deploy this Helm chart.
 
 ## What is Nexus
- Nexus by Sonatype is a repository manager that organizes, stores and distributes artifacts needed for development. With Nexus, developers can completely control access to, and deployment of, every artifact in an organization from a single location, making it easier to distribute software.
+ Nexus by Sonatype is a repository manager that organizes, stores and distributes artifacts needed for development. With Nexus, developers can completely control access to, and deployment of, every artifact in an organization from a single location, making it easier to distribute software. 
 
 <!-- BEGIN_AUTOMATED_TF_DOCS_BLOCK -->
 ## Requirements
