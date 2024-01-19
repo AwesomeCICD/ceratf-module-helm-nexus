@@ -60,6 +60,7 @@ nexus:
     runAsUser: 200
     runAsGroup: 200
     fsGroup: 200
+    fsGroupChangePolicy: "OnRootMismatch"
   podAnnotations: {}
   livenessProbe:
     initialDelaySeconds: 60
@@ -89,13 +90,13 @@ deployment:
   # # Add init containers. e.g. to be used to give specific permissions for nexus-data.
   # # Add your own init container or uncomment and modify the given example.
   initContainers:
-  #   - name: fmp-volume-permission
-  #   image: busybox
-  #   imagePullPolicy: IfNotPresent
-  #   command: ['chown','-R', '200', '/nexus-data']
-  #   volumeMounts:
-  #     - name: nexus-data
-  #       mountPath: /nexus-data
+    - name: fmp-volume-permission
+    image: busybox
+    imagePullPolicy: IfNotPresent
+    command: ['chown','-R', '200', '/nexus-data']
+    volumeMounts:
+      - name: nexus-data
+        mountPath: /nexus-data
   # Uncomment and modify this to run a command after starting the nexus container.
   postStart:
     command:    # '["/bin/sh", "-c", "ls"]'
