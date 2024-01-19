@@ -90,12 +90,12 @@ deployment:
   # # Add init containers. e.g. to be used to give specific permissions for nexus-data.
   # # Add your own init container or uncomment and modify the given example.
   initContainers:
-    - name: fmp-volume-permission
-      image: busybox
-      imagePullPolicy: IfNotPresent
-      command: ['chown','-R', '200', '/nexus-data']
+    - name: ensure-nexus-data-permissions
+      image: busybox:1.33
+      imagePullPolicy: Always
+      command: ["mkdir", "-p", "/nexus-data/etc"]
       volumeMounts:
-        - name: nexus-data
+        - name: nexus-repository-manager-data
           mountPath: /nexus-data
   # Uncomment and modify this to run a command after starting the nexus container.
   postStart:
