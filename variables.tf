@@ -21,7 +21,7 @@ variable "values" {
 variable "chart_version" {
   description = "helm chart version"
   type        = string
-  default     = "55.0.0" #latest as of 2023/06/09
+  default     = "64.0.0" #latest as of 2024/01/19
 }
 
 
