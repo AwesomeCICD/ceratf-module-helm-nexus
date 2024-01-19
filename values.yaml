@@ -33,7 +33,7 @@ nexus:
     - name: NEXUS_SECURITY_RANDOMPASSWORD
       value: "false"
   properties:
-    override: false
+    override: true
     data:
       nexus.scripts.allowCreation: true
       # See this article for ldap configuratioon options https://support.sonatype.com/hc/en-us/articles/216597138-Setting-Advanced-LDAP-Connection-Properties-in-Nexus-Repository-Manager
@@ -44,11 +44,11 @@ nexus:
   # minimum recommended memory settings for a small, person instance from
   # https://help.sonatype.com/repomanager3/product-information/system-requirements
     requests:
-      cpu: 1
-      memory: 3Gi
+      memory: "2154Mi"
+      cpu: "915m"
     limits:
-      cpu: 2
-      memory: 4Gi
+      memory: "2765Mi"
+      cpu: "2000m"
 
   # The ports should only be changed if the nexus image uses a different port
   nexusPort: 8081
