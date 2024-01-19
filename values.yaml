@@ -91,12 +91,12 @@ deployment:
   # # Add your own init container or uncomment and modify the given example.
   initContainers:
     - name: fmp-volume-permission
-    image: busybox
-    imagePullPolicy: IfNotPresent
-    command: ['chown','-R', '200', '/nexus-data']
-    volumeMounts:
-      - name: nexus-data
-        mountPath: /nexus-data
+      image: busybox
+      imagePullPolicy: IfNotPresent
+      command: ['chown','-R', '200', '/nexus-data']
+      volumeMounts:
+        - name: nexus-data
+          mountPath: /nexus-data
   # Uncomment and modify this to run a command after starting the nexus container.
   postStart:
     command:    # '["/bin/sh", "-c", "ls"]'
