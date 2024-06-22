@@ -30,7 +30,7 @@ variable "circleci_region" {
   type        = string
 }
 
-variable "root_domain" {
+variable "target_domain" {
   description = "where we at"
   type        = string
 }
