@@ -21,11 +21,16 @@ variable "values" {
 variable "chart_version" {
   description = "helm chart version"
   type        = string
-  default     = "61.0.2" #latest as of 2024/01/19
+  default     = "64.2.0" #latest as of 2024/06/21
 }
 
 
 variable "circleci_region" {
+  description = "where we at"
+  type        = string
+}
+
+variable "root_domain" {
   description = "where we at"
   type        = string
 }
