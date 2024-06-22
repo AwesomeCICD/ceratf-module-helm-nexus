@@ -13,9 +13,9 @@ function post_creds {
             --data "${NEW_PASSWORD}" \
             --connect-timeout 2 \
             --max-time 5 \
-            --retry 30 \
+            --retry 60 \
             --retry-delay 5 \
-            --retry-max-time 180 \
+            --retry-max-time 300 \
             https://nexus.${TARGET_DOMAIN}/service/rest/v1/security/users/admin/change-password \
             -o response.txt 2>/dev/null)
 
