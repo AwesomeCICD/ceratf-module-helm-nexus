@@ -18,13 +18,12 @@ nexus:
     enabled: true
     registries:
       - port: 8443
-        #host: chart.local
-        #secretName: registry-secret
+
   env:
     # minimum recommended memory settings for a small, person instance from
     # https://help.sonatype.com/repomanager3/product-information/system-requirements
     - name: INSTALL4J_ADD_VM_PARAMS
-      value: >-
+      value: |-
         -Xms2048M -Xmx2048M
         -XX:MaxDirectMemorySize=2048M
         -XX:+UnlockExperimentalVMOptions
