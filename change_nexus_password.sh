@@ -2,7 +2,7 @@ NEW_PASSWORD=${1}
 TARGET_DOMAIN=${2}
 set +e
 
-echo "This should only run when nexus first created, and JVMs dont start quickly. Curl will retry for 3 minutes."
+echo "This should only run when nexus first created, and JVMs dont start quickly but should be rready. Curl will retry for 2 minutes."
 
 let attempts=0
 
@@ -11,11 +11,11 @@ function post_creds {
       response=$(curl -w "%{http_code}"  -iu admin:"admin123" \
             -XPUT -H 'Content-Type: text/plain' \
             --data "${NEW_PASSWORD}" \
-            --connect-timeout 2 \
+            --connect-timeout 4 \
             --max-time 5 \
-            --retry 60 \
+            --retry 20 \
             --retry-delay 5 \
-            --retry-max-time 300 \
+            --retry-max-time 120 \
             https://nexus.${TARGET_DOMAIN}/service/rest/v1/security/users/admin/change-password \
             -o response.txt 2>/dev/null)
 
