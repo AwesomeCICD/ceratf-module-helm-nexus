@@ -24,8 +24,8 @@ nexus:
     # https://help.sonatype.com/repomanager3/product-information/system-requirements
     - name: INSTALL4J_ADD_VM_PARAMS
       value: |-
-        -Xms2048M -Xmx2048M
-        -XX:MaxDirectMemorySize=2048M
+        -Xms2048M -Xmx3072M
+        -XX:MaxDirectMemorySize=3072M
         -XX:+UnlockExperimentalVMOptions
         -XX:+UseCGroupMemoryLimitForHeap
         -Djava.util.prefs.userRoot=/nexus-data/javaprefs
