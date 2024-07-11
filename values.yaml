@@ -44,10 +44,10 @@ nexus:
   # https://help.sonatype.com/repomanager3/product-information/system-requirements
     requests:
       memory: "2154Mi"
-      cpu: "915m"
-    limits:
-      memory: "2765Mi"
       cpu: "2000m"
+    limits:
+      memory: "4096Mi"
+      cpu: "4000m"
 
   # The ports should only be changed if the nexus image uses a different port
   nexusPort: 8081
