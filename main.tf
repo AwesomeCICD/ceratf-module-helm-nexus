@@ -48,10 +48,11 @@ resource "null_resource" "nexus_password_to_secret" {
   }
 
   depends_on = [helm_release.nexus]
-  
+
 }
 
 
+data "aws_region" "current" {}
 resource "kubernetes_storage_class" "expandable" {
   metadata {
     name = "nexus-gp2"
