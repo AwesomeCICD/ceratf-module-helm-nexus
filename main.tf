@@ -27,7 +27,8 @@ resource "helm_release" "nexus" {
   ]
 
   depends_on = [
-    kubernetes_namespace.nexus_namespace
+    kubernetes_namespace.nexus_namespace,
+    kubernetes_storage_class.expandable
   ]
 
   timeout = 600
@@ -50,6 +51,28 @@ resource "null_resource" "nexus_password_to_secret" {
   
 }
 
+
+resource "kubernetes_storage_class" "expandable" {
+  metadata {
+    name = "nexus-gp2"
+  }
+  storage_provisioner = "kubernetes.io/aws-ebs"
+
+  reclaim_policy = "Retain"
+  allowed_topologies {
+    match_label_expressions {
+      key = "failure-domain.beta.kubernetes.io/zone"
+      values = [
+        "${data.aws_region.current.name}b"
+      ]
+    }
+  }
+  volume_binding_mode    = "WaitForFirstConsumer"
+  allow_volume_expansion = "true"
+  parameters = {
+    type = "gp2"
+  }
+}
 
 
 
