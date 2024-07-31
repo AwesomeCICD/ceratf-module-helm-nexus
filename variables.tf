@@ -45,3 +45,8 @@ variable "vault_mount_path" {
   type    = string
   default = "secret"
 }
+
+variable "ingress_namespace" {
+  type    = string
+  default = "istio-ingress"
+}
