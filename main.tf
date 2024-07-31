@@ -12,6 +12,22 @@ resource "kubernetes_namespace" "nexus_namespace" {
   }
 }
 
+
+resource "kubectl_manifest" "istio_virtualservice_nexus" {
+  force_new = true
+  yaml_body = templatefile(
+    "${path.module}/templates/virtualservice.yaml.tpl",
+    {
+      namespace       = var.namespace,
+      circleci_region = var.circleci_region,
+      target_domain   = var.target_domain
+    }
+  )
+  depends_on = [
+    kubernetes_namespace.nexus_namespace
+  ]
+}
+
 resource "helm_release" "nexus" {
 
   name = "nxrm"
@@ -28,7 +44,8 @@ resource "helm_release" "nexus" {
 
   depends_on = [
     kubernetes_namespace.nexus_namespace,
-    kubernetes_storage_class.expandable
+    kubernetes_storage_class.expandable,
+    kubectl_manifest.istio_virtualservice_nexus
   ]
 
   timeout = 600
