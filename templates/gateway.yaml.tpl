@@ -1,8 +1,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: ${circleci_region}-istio-gateway-nexus
-  namespace: ${ingress_namespace}
+  name: istio-gateway-nexus
+  namespace: nexus
 spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
@@ -15,6 +15,7 @@ spec:
        httpsRedirect: true
     hosts:
     - "*.nexus.${target_domain}" # all nexus domains
+    - "nexus.${target_domain}" # all nexus domains
   - port:
       number: 443
       name: https
@@ -24,3 +25,4 @@ spec:
       credentialName: "cert-nexus"
     hosts:
     - "*.nexus.${target_domain}" # all nexus domains
+    - "nexus.${target_domain}" # all nexus domains
