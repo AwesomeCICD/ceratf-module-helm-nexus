@@ -7,7 +7,7 @@ spec:
   hosts:
     - "docker.nexus.${target_domain}"
   gateways:
-    - istio-gateway-nexus
+    - istio-ingress/${circleci_region}-istio-gateway-subdomains
   http:
   - route:
     - destination:
@@ -24,7 +24,7 @@ spec:
   hosts:
     - "nexus.${target_domain}"
   gateways:
-    - istio-gateway-nexus
+    - istio-ingress/${circleci_region}-istio-gateway-subdomains
   http:
   - route:
     - destination:
