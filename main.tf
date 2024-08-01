@@ -12,36 +12,6 @@ resource "kubernetes_namespace" "nexus_namespace" {
   }
 }
 
-
-resource "kubectl_manifest" "istio_gateway" {
-  force_new = true
-  yaml_body = templatefile(
-    "${path.module}/templates/gateway.yaml.tpl",
-    {
-      ingress_namespace = var.ingress_namespace,
-      circleci_region   = var.circleci_region,
-      target_domain     = var.target_domain
-    }
-  )
-  depends_on = [
-    kubernetes_namespace.nexus_namespace
-  ]
-}
-
-resource "kubectl_manifest" "nexus_cert" {
-  yaml_body = templatefile(
-    "${path.module}/templates/cert.yaml.tpl",
-    {
-      ingress_namespace = var.ingress_namespace,
-      circleci_region   = var.circleci_region,
-      target_domain     = var.target_domain,
-    }
-  )
-  depends_on = [
-    kubectl_manifest.istio_gateway
-  ]
-}
-
 resource "kubectl_manifest" "istio_virtualservice_nexus" {
   force_new = true
   yaml_body = templatefile(
@@ -53,7 +23,7 @@ resource "kubectl_manifest" "istio_virtualservice_nexus" {
     }
   )
   depends_on = [
-    kubectl_manifest.istio_gateway
+    kubernetes_namespace.nexus_namespace
   ]
 }
 
