@@ -27,6 +27,20 @@ resource "kubectl_manifest" "istio_virtualservice_nexus" {
   ]
 }
 
+resource "kubectl_manifest" "nexus_blob_pvc" {
+  force_new = true
+  yaml_body = templatefile(
+    "${path.module}/templates/blob-pvc.yaml.tpl",
+    {
+      namespace = var.namespace,
+      size      = "20Gi"
+    }
+  )
+  depends_on = [
+    kubernetes_namespace.nexus_namespace
+  ]
+}
+
 resource "helm_release" "nexus" {
 
   name = "nxrm"
@@ -44,7 +58,8 @@ resource "helm_release" "nexus" {
   depends_on = [
     kubernetes_namespace.nexus_namespace,
     kubernetes_storage_class.expandable,
-    kubectl_manifest.istio_virtualservice_nexus
+    kubectl_manifest.istio_virtualservice_nexus,
+    kubectl_manifest.nexus_blob_pvc
   ]
 
   timeout = 600
