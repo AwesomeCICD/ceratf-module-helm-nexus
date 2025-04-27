@@ -96,6 +96,13 @@ deployment:
       volumeMounts:
         - name: nexus-repository-manager-data
           mountPath: /nexus-data
+    #- name: migrate-old-blobs
+    #  image: busybox:1.33
+    #  imagePullPolicy: Always
+    #  command: ["sh", "-c", "mv /nexus-data/blobs/default /nexus-data/blobs-ext/ && rm -r /nexus-data/blobs && ln -s /nexus-data/blobs-ext /nexus-data/blobs"]
+    #  volumeMounts:
+    #    - name: nexus-repository-manager-data
+    #      mountPath: /nexus-data
   # Uncomment and modify this to run a command after starting the nexus container.
   postStart:
     command:    # '["/bin/sh", "-c", "ls"]'
@@ -107,7 +114,6 @@ deployment:
     - name: nexus-blobs
       persistentVolumeClaim:
         claimName: nexus-blob-storage
-
   additionalVolumeMounts:
     - mountPath: /nexus-data/blobs
       name: nexus-blobs
