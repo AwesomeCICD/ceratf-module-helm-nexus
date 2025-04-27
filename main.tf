@@ -12,10 +12,24 @@ resource "kubernetes_namespace" "nexus_namespace" {
   }
 }
 
+resource "kubectl_manifest" "istio_virtualservice_docker" {
+  force_new = true
+  yaml_body = templatefile(
+    "${path.module}/templates/virtualservice_docker.yaml.tpl",
+    {
+      namespace       = var.namespace,
+      circleci_region = var.circleci_region,
+      target_domain   = var.target_domain
+    }
+  )
+  depends_on = [
+    kubernetes_namespace.nexus_namespace
+  ]
+}
 resource "kubectl_manifest" "istio_virtualservice_nexus" {
   force_new = true
   yaml_body = templatefile(
-    "${path.module}/templates/virtualservice.yaml.tpl",
+    "${path.module}/templates/virtualservice_main.yaml.tpl",
     {
       namespace       = var.namespace,
       circleci_region = var.circleci_region,
@@ -59,6 +73,7 @@ resource "helm_release" "nexus" {
     kubernetes_namespace.nexus_namespace,
     kubernetes_storage_class.expandable,
     kubectl_manifest.istio_virtualservice_nexus,
+    kubectl_manifest.istio_virtualservice_docker,
     kubectl_manifest.nexus_blob_pvc
   ]
 
